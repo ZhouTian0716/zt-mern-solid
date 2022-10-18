@@ -3,7 +3,7 @@ import classes from "./Form.module.scss";
 
 const Form = () => {
   return (
-    <div>Form</div>
+    <h1 className={classes.header}>Form</h1>
   )
 }
 
