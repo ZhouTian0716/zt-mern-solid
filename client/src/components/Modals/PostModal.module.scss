@@ -1,0 +1,155 @@
+.title {
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.close_btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  background-color: rgba(128, 128, 128, 0.1);
+  color: gray;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
+}
+
+.form {
+  position: relative;
+  width: 300px;
+  border-radius: 5px;
+  background-color: ivory;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.5rem;
+}
+
+.background_gray {
+  background-color: rgba(128, 128, 128, 0.1);
+  border-radius: 5px;
+}
+
+.userImg {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  border: none;
+  background-color: rgba(128, 128, 128, 0.3);
+  padding: 2px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.post_input {
+  padding: 5px;
+  border-radius: 5px;
+  color: rgba(128, 128, 128, 1);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  outline: none;
+}
+
+.img_dialog {
+  padding: 5px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 5px;
+  .photo_area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    margin-bottom: 8px;
+    .upload_btn {
+      font-size: 20px;
+      padding: 8px;
+      border-radius: 50%;
+      background-color: rgba(128, 128, 128, 0.3);
+      cursor: pointer;
+    }
+    .cancel_btn {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      padding: 3px;
+      right: 5px;
+      top: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.3);
+      }
+    }
+  }
+  .add_from_device {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg {
+      font-size: 20px;
+      padding: 5px;
+      border-radius: 50%;
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+    button {
+      border: none;
+      background-color: rgba(128, 128, 128, 0.15);
+      padding: 8px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.3);
+      }
+    }
+  }
+}
+
+.addOns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 15px;
+  background-color: white;
+}
+.functions {
+  svg {
+    font-size: 20px;
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+  }
+}
+
+.post_btn {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1877f2;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #1876f29d;
+  }
+}
