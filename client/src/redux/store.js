@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./reducers/counter";
+import displayReducer from "./reducers/displaySlice";
 import postsReducer from "./reducers/postsSlice";
 
 export const store = configureStore({
-  reducer: { counter: counterReducer, posts: postsReducer },
+  reducer: { display: displayReducer, posts: postsReducer },
 });

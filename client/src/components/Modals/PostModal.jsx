@@ -11,9 +11,12 @@ import { BsFillFileImageFill } from "react-icons/bs";
 import { TiUserAdd } from "react-icons/ti";
 import FileBase from "react-file-base64";
 
-// Redux
-import {createOne, addNewPost} from '../../redux/reducers/postsSlice'
+// Reduxjs
 import { useDispatch } from "react-redux";
+// Query for getting Redux State
+// Action for updating Redux State
+import {createOne, addNewPost} from '../../redux/reducers/postsSlice'
+import { postModalToggle } from "../../redux/reducers/displaySlice";
 
 // CSS Module classes
 import classes from "./PostModal.module.scss";
@@ -44,7 +47,7 @@ const PostModal = () => {
     creator: "Joe Tian",
     title: "",
     content: "",
-    public: "true",
+    open: "true",
     selectedFile: "",
   });
 
@@ -65,7 +68,7 @@ const PostModal = () => {
 
   return (
     <form className={form} onSubmit={handleSubmit}>
-      <IoCloseOutline className={close_btn} />
+      <IoCloseOutline className={close_btn} onClick={()=>dispatch(postModalToggle())}/>
       <div className={title}>Create Post</div>
       <div className={profile}>
         <img src={userImageUrl} alt={"me"} className={userImg} />
@@ -75,9 +78,9 @@ const PostModal = () => {
             name=""
             id=""
             className={select}
-            value={postData.private}
+            value={postData.open}
             onChange={(e) => {
-              setPostData({ ...postData, public: e.target.value });
+              setPostData({ ...postData, open: e.target.value });
             }}
           >
             <option value="true">Public</option>

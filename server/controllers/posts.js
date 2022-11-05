@@ -1,9 +1,10 @@
+import mongoose from "mongoose";
 // 👻 Controllers Need Access to Models
-import PostModel from "../models/post.js";
+import PostCollection from "../models/post.js";
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new PostModel(post);
+  const newPost = new PostCollection(post);
   try {
     await newPost.save();
     res.status(201).json({ Added: newPost });
@@ -14,7 +15,7 @@ export const createPost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
-    const allPosts = await PostModel.find();
+    const allPosts = await PostCollection.find();
     // 笔记: json()里的res最好在insomnia里面测试检查一下结构
     // 方便前端引用
     res.status(200).json(allPosts);
@@ -23,19 +24,29 @@ export const getAllPosts = async (req, res) => {
   }
 };
 
-export const updatePost = (req, res) => {
-  res.send("hello to update route");
+export const updatePost = async (req, res) => {
+  // Destructure and rename to _id
+  const { id } = req.params;
+  const { title, content, creator, selectedFile, open } = req.body;
+  console.log(req.body)
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No post with id: ${id}`);
+
+  const updatedPost = { creator, title, content, open, selectedFile, _id: id };
+
+  await PostCollection.findByIdAndUpdate(id, updatedPost, { new: true });
+
+  res.json(updatedPost);
 };
 
 export const deletePost = async (req, res) => {
   const { postId } = req.body;
   try {
-    const postSelected = await PostModel.findById(postId).exec();
+    const postSelected = await PostCollection.findById(postId).exec();
     const result = await postSelected.deleteOne();
     res.status(201).json(result);
   } catch (error) {
     res.status(409).json({ ServerReportError: error.message });
   }
 };
-
-

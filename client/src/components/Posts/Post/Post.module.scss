@@ -1,4 +1,25 @@
-.header {
-    color: orange;
+.post_card {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 200px;
+  border-radius: 20px;
+  background-color: ivory;
+
+  img {
+    border-radius: 20px 20px 0 0;
   }
-  
+  h3 {
+    color: orange;
+    line-height: 0;
+  }
+  p{
+    color: grey;
+    line-height: 0;
+  }
+  span{
+    font-size:12px;
+    color: grey;
+    
+  }
+}

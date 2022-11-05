@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema({
   title: String,
   content: String,
   creator: String,
-  public: Boolean,
+  open: Boolean,
   selectedFile: String,
   likeCount: {
     type: Number,
@@ -16,9 +16,9 @@ const postSchema = mongoose.Schema({
   },
 });
 
-const PostModel = mongoose.model("Post", postSchema);
+const PostCollection = mongoose.model("Post", postSchema);
 
-export default PostModel;
+export default PostCollection;
 
 // Note: Think about to add location info of creator
 
