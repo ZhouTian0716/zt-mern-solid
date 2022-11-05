@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 const App = () => {
-  const { posts } = useSelector((state) => state.posts);
+  
   // const [posts, setPosts] = useState([]);
 
   return (

@@ -12,5 +12,6 @@ const router = express.Router();
 // 👻 Define your routes and methods (from controller folder)
 router.get("/", getAllPosts);
 router.post("/", createPost);
+router.delete("/", deletePost);
 
 export default router;

@@ -6,12 +6,11 @@ import App from "./App";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
-// 👻 Reducers
-import { fetchPosts } from "./redux/reducers/posts"
-// import reducers from './reducers'
-
+// 👻 Redux toolkit way of working, instead of useEffect in each component
 // Initial State fetched on App loading
+import { fetchPosts } from "./redux/reducers/postsSlice";
 store.dispatch(fetchPosts());
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
