@@ -21,7 +21,7 @@ const App = () => {
   const dispatch = useDispatch();
   const isPosting = useSelector(postModalStatus);
   const posts = useSelector(selectAllPosts);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <>
@@ -39,7 +39,7 @@ const App = () => {
 
           <AiOutlineLogin className="btn" />
         </div>
-        {isPosting && <PostModal className="post_modal" />}
+        {isPosting && <div className="underlay"><PostModal className="post_modal" /></div>}
         <div className="app_body">
           {posts ? (
             <Posts posts={posts} />

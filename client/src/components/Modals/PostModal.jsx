@@ -12,10 +12,11 @@ import { TiUserAdd } from "react-icons/ti";
 import FileBase from "react-file-base64";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // Query for getting Redux State
+import { postModalStatus } from "../../redux/reducers/displaySlice";
 // Action for updating Redux State
-import {addNewPost} from '../../redux/reducers/postsSlice'
+import { addNewPost } from "../../redux/reducers/postsSlice";
 import { postModalToggle } from "../../redux/reducers/displaySlice";
 
 // CSS Module classes
@@ -42,16 +43,19 @@ const {
 const userImageUrl =
   "https://zt-image-storage.s3.ap-southeast-2.amazonaws.com/users/18.JPG";
 const PostModal = () => {
-  const [isAddingPhoto, setIsAddingPhoto] = useState(true);
-  const [postData, setPostData] = useState({
+  const postInputInitial = {
     creator: "Joe Tian",
     title: "",
     content: "",
     open: "true",
     selectedFile: "",
-  });
+  };
+  const [isAddingPhoto, setIsAddingPhoto] = useState(true);
+  const [postData, setPostData] = useState(postInputInitial);
 
-  const dispatch=useDispatch()
+  const isPosting = useSelector(postModalStatus);
+
+  const dispatch = useDispatch();
 
   const clearInputs = () => {};
 
@@ -59,15 +63,20 @@ const PostModal = () => {
     // 笔记：需要做两件事
     e.preventDefault();
     // 1. post to database, Asynchronously
-    dispatch(addNewPost(postData)).unwrap()
+    dispatch(addNewPost(postData)).unwrap();
     // 2. post to redux store, update the global state. Synchronously
     // 👻👻👻 But the second step is handled by addNewPost.fullfiled 👻👻👻
-    
+    // reset those inputs
+    dispatch(postModalToggle());
+
   };
 
   return (
     <form className={form} onSubmit={handleSubmit}>
-      <IoCloseOutline className={close_btn} onClick={()=>dispatch(postModalToggle())}/>
+      <IoCloseOutline
+        className={close_btn}
+        onClick={() => dispatch(postModalToggle())}
+      />
       <div className={title}>Create Post</div>
       <div className={profile}>
         <img src={userImageUrl} alt={"me"} className={userImg} />
@@ -121,7 +130,7 @@ const PostModal = () => {
               type="file"
               multiple={false}
               // To Notice here need to Destructure base64, in order to save the correct detail into selectedFile
-              onDone={({base64}) =>
+              onDone={({ base64 }) =>
                 setPostData({ ...postData, selectedFile: base64 })
               }
             />
@@ -129,7 +138,7 @@ const PostModal = () => {
           <div className={`${background_gray} ${add_from_device}`}>
             <FaMobileAlt />
             <span>Add from your mobile</span>
-            <button>Add</button>
+            <button disabled>Add</button>
           </div>
         </div>
       )}
