@@ -20,25 +20,41 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
-  async (initialPost) => {
-    const response = await axios.post(Posts_Route, initialPost);
+  async (postData) => {
+    const response = await axios.post(Posts_Route, postData);
     console.log(response.data);
     return response.data;
   }
 );
+
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (requestBody) => {
+    // console.log(requestBody);
+    // 笔记：axios delete method, requestBody needs to be set like this
+    const response = await axios.delete(Posts_Route, { data: requestBody });
+    console.log(response.data);
+  }
+);
 //////////////////////////////////////////////////////////////////////////////////
 
+// Redux Toolkit allows us to write "mutating" logic in reducers. It
+// doesn't actually mutate the state because it uses the Immer library,
+// which detects changes to a "draft state" and produces a brand new
+// immutable state based off those changes
+// ONLY WORKS INSIDE OF createSlice
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    // Redux Toolkit allows us to write "mutating" logic in reducers. It
-    // doesn't actually mutate the state because it uses the Immer library,
-    // which detects changes to a "draft state" and produces a brand new
-    // immutable state based off those changes
-    // ONLY WORKS INSIDE OF createSlice
     createOne: (state, action) => {
       state.posts.push(action.payload);
+    },
+    deleteOne: (state, action) => {
+      const filteredPosts = state.posts.filter(
+        (post) => post._id !== action.payload
+      );
+      state.posts = filteredPosts;
     },
   },
   extraReducers(builder) {
@@ -50,7 +66,7 @@ export const postsSlice = createSlice({
         state.status = "succeeded";
         const loadedPosts = action.payload;
         // console.log(loadedPosts);
-       
+
         state.posts = loadedPosts;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
@@ -62,12 +78,17 @@ export const postsSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         state.posts.push(action.payload);
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const  id  = action.payload;
+        const posts = state.posts.filter((post) => post._id !== id);
+        state.posts = posts;
       });
   },
 });
 
 // Action creators are generated for each case of reducers
-export const { createOne } = postsSlice.actions;
+export const { createOne, deleteOne } = postsSlice.actions;
 
 // This is easier for component to call useSelector, if our state shape change in the future
 export const selectAllPosts = (state) => state.posts.posts;

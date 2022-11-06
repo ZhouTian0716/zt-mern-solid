@@ -10,12 +10,18 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 // Query for getting Redux State
 import { postModalStatus } from "./redux/reducers/displaySlice";
+import { selectAllPosts } from "./redux/reducers/postsSlice";
 // Action for updating Redux State
 import { postModalToggle } from "./redux/reducers/displaySlice";
+
+// Component imports
+import LoadingText from "./components/Loaders/LoadingText";
 
 const App = () => {
   const dispatch = useDispatch();
   const isPosting = useSelector(postModalStatus);
+  const posts = useSelector(selectAllPosts);
+  console.log(posts);
 
   return (
     <>
@@ -35,7 +41,11 @@ const App = () => {
         </div>
         {isPosting && <PostModal className="post_modal" />}
         <div className="app_body">
-          <Posts />
+          {posts ? (
+            <Posts posts={posts} />
+          ) : (
+            <LoadingText message={"Loading Posts"} />
+          )}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Posts.module.scss";
 import Post from "./Post/Post";
 
@@ -9,20 +9,12 @@ import {
   getPostsStatus,
 } from "../../redux/reducers/postsSlice";
 
-const Posts = () => {
-
-  const posts = useSelector(selectAllPosts);
-  const postStatus = useSelector(getPostsStatus);
-  // console.log(postStatus);
-
+const Posts = ({ posts }) => {
   return (
-    <div>
-      {postStatus === "loading" ? (
-        <h1 className={classes.header}>Posts loading</h1>
-      ) : (
-       posts.map((post, index) => <Post post={post} key={index} />)
-      )}
-      
+    <div className={classes.container}>
+      {posts.map((post, index) => (
+        <Post post={post} key={index} />
+      ))}
     </div>
   );
 };

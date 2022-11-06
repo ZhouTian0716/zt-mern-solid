@@ -11,7 +11,7 @@ import { BsFillFileImageFill } from "react-icons/bs";
 import { TiUserAdd } from "react-icons/ti";
 import FileBase from "react-file-base64";
 
-// Reduxjs
+// Redux
 import { useDispatch } from "react-redux";
 // Query for getting Redux State
 // Action for updating Redux State
@@ -59,8 +59,7 @@ const PostModal = () => {
     // 笔记：需要做两件事
     // 1. post to redux store, update the global state. Synchronously
     e.preventDefault();
-    console.log("hi");
-    console.log(postData);
+    // console.log(postData);
     dispatch(createOne(postData))
     // 2. post to database, Asynchronously
     dispatch(addNewPost(postData)).unwrap()

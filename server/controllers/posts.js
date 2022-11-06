@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import PostCollection from "../models/post.js";
 
 export const createPost = async (req, res) => {
+  // console.log(req.body)
   const post = req.body;
   const newPost = new PostCollection(post);
   try {
@@ -28,7 +29,7 @@ export const updatePost = async (req, res) => {
   // Destructure and rename to _id
   const { id } = req.params;
   const { title, content, creator, selectedFile, open } = req.body;
-  console.log(req.body)
+  console.log(req.body);
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
@@ -41,11 +42,13 @@ export const updatePost = async (req, res) => {
 };
 
 export const deletePost = async (req, res) => {
+  console.log(req.body)
   const { postId } = req.body;
+
   try {
     const postSelected = await PostCollection.findById(postId).exec();
     const result = await postSelected.deleteOne();
-    res.status(201).json(result);
+    res.status(201).json({ status: "delete success", item_id: result._id });
   } catch (error) {
     res.status(409).json({ ServerReportError: error.message });
   }
