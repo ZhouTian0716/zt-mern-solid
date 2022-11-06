@@ -8,7 +8,7 @@ export const createPost = async (req, res) => {
   const newPost = new PostCollection(post);
   try {
     await newPost.save();
-    res.status(201).json({ Added: newPost });
+    res.status(201).json(newPost);
   } catch (error) {
     res.status(409).json({ ServerReportError: error.message });
   }

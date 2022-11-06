@@ -6,13 +6,15 @@ const Posts_Route = "http://localhost:4000/posts";
 
 const initialState = {
   // posts: ['idle','idle'],
-  posts: null,
+  posts: [],
   status: "idle", //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 };
 
+// Take away: Learn how to use createAsyncThunk!!!!
 // first arg: the prefix string for the generated action type
 // second arg: payload creator call back
+// 💥💥payload returned and created for updating redux state at fetchPosts.fullfilled 💥💥
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await axios.get(Posts_Route);
   return response.data;
@@ -22,7 +24,7 @@ export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
   async (postData) => {
     const response = await axios.post(Posts_Route, postData);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   }
 );
@@ -48,6 +50,7 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     createOne: (state, action) => {
+      console.log(action.payload);
       state.posts.push(action.payload);
     },
     deleteOne: (state, action) => {
@@ -60,7 +63,7 @@ export const postsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
-        state.status = "loading";
+        state.status = "fetching";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -77,10 +80,11 @@ export const postsSlice = createSlice({
         state.status = "uploading";
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.posts.push(action.payload);
       })
       .addCase(deletePost.fulfilled, (state, action) => {
-        const  id  = action.payload;
+        const id = action.payload;
         const posts = state.posts.filter((post) => post._id !== id);
         state.posts = posts;
       });

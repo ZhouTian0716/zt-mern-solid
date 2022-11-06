@@ -15,7 +15,7 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 // Query for getting Redux State
 // Action for updating Redux State
-import {createOne, addNewPost} from '../../redux/reducers/postsSlice'
+import {addNewPost} from '../../redux/reducers/postsSlice'
 import { postModalToggle } from "../../redux/reducers/displaySlice";
 
 // CSS Module classes
@@ -57,12 +57,12 @@ const PostModal = () => {
 
   const handleSubmit = (e) => {
     // 笔记：需要做两件事
-    // 1. post to redux store, update the global state. Synchronously
     e.preventDefault();
-    // console.log(postData);
-    dispatch(createOne(postData))
-    // 2. post to database, Asynchronously
+    // 1. post to database, Asynchronously
     dispatch(addNewPost(postData)).unwrap()
+    // 2. post to redux store, update the global state. Synchronously
+    // 👻👻👻 But the second step is handled by addNewPost.fullfiled 👻👻👻
+    
   };
 
   return (
