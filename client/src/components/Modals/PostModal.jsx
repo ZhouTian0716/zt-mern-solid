@@ -53,8 +53,6 @@ const PostModal = () => {
   const [isAddingPhoto, setIsAddingPhoto] = useState(true);
   const [postData, setPostData] = useState(postInputInitial);
 
-  const isPosting = useSelector(postModalStatus);
-
   const dispatch = useDispatch();
 
   const clearInputs = () => {};
@@ -103,6 +101,7 @@ const PostModal = () => {
         onChange={(e) => {
           setPostData({ ...postData, title: e.target.value });
         }}
+        required
       />
       <textarea
         className={post_input}
@@ -113,6 +112,7 @@ const PostModal = () => {
         onChange={(e) => {
           setPostData({ ...postData, content: e.target.value });
         }}
+        required
       />
       {isAddingPhoto && (
         <div className={img_dialog}>
@@ -132,6 +132,7 @@ const PostModal = () => {
               onDone={({ base64 }) =>
                 setPostData({ ...postData, selectedFile: base64 })
               }
+              required
             />
           </div>
           {/* <input type="file" onDone={({ base64 }) => console.log(base64)} /> */}
