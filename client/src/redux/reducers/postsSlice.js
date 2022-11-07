@@ -74,14 +74,15 @@ export const postsSlice = createSlice({
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.error;
       })
       .addCase(addNewPost.pending, (state, action) => {
         state.status = "uploading";
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.posts.push(action.payload);
+        // state.posts.push(action.payload);
+        state.posts.unshift(action.payload);
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         const id = action.payload;

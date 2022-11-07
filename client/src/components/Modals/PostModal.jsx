@@ -68,7 +68,6 @@ const PostModal = () => {
     // 👻👻👻 But the second step is handled by addNewPost.fullfiled 👻👻👻
     // reset those inputs
     dispatch(postModalToggle());
-
   };
 
   return (
@@ -135,6 +134,7 @@ const PostModal = () => {
               }
             />
           </div>
+          {/* <input type="file" onDone={({ base64 }) => console.log(base64)} /> */}
           <div className={`${background_gray} ${add_from_device}`}>
             <FaMobileAlt />
             <span>Add from your mobile</span>

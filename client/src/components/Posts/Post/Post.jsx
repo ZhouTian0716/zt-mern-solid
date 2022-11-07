@@ -56,7 +56,7 @@ const Post = ({ post }) => {
           {post.content?.slice(0, 40)}
           {post.content?.length > 40 && "..."}
         </p>
-
+        <p>{post._id}</p>
         <span>
           By : {post.creator}, {moment(post.createdAt).fromNow()}
         </span>
