@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import { FaUserLock } from "react-icons/fa";
+import {Link } from "react-router-dom"
 
 import PasswordInput from "../../components/Input/PasswordInput";
 
 import classes from "./AuthForm.module.scss";
-const { flex_row, sign, auth_input } = classes;
+const { flex_row, sign, auth_input,small_link } = classes;
 
 const AuthForm = () => {
   const signUpDataInitial = {
-    first_name: "demo",
-    last_name: "demo",
-    email: "SignUp@example.com",
-    password: "123456",
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
   };
 
   const signInDataInitial = {
-    email: "Signin@example.com",
+    email: "",
     password: "",
   };
 
   const [hasAccount, setHasAccount] = useState(false);
   const [signUpData, setSignUpData] = useState(signUpDataInitial);
   const [signInData, setSignInData] = useState(signInDataInitial);
-  const [repeatPassword, setRepeatPassword] = useState("123456");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    console.log(signInData);
+    // console.log(signInData);
+    // pass signInData to backend here
+
+    // Reset State
+    clearSignInForm();
   };
 
   const handleSignUp = (e) => {
@@ -34,9 +41,38 @@ const AuthForm = () => {
     // console.log(signUpData);
     if (signUpData.password === repeatPassword) {
       console.log("match");
+      // console.log(signInData);
+      // pass signUpData to backend here
+
+      // Reset State
+      clearSignUpForm();
     } else {
-      console.log("not match");
+      setHasError(true);
+      setErrorMessage("Confirm Password Not Matching");
+      // Clean up error state
+      setTimeout(() => {
+        setHasError(false);
+        setErrorMessage("");
+      }, 2000);
     }
+  };
+
+  const clearSignInForm = () => {
+    setSignInData(signInDataInitial);
+  };
+
+  const clearSignUpForm = () => {
+    setSignUpData(signUpDataInitial);
+    setRepeatPassword("");
+  };
+  const goSignIn = () => {
+    clearSignInForm();
+    setHasAccount((prev) => !prev);
+  };
+
+  const goSignUp = () => {
+    clearSignUpForm();
+    setHasAccount((prev) => !prev);
   };
 
   const signUpNames = (
@@ -113,15 +149,15 @@ const AuthForm = () => {
           setRepeatPwdState={setRepeatPassword}
         />
       )}
+      {hasError && <p>{errorMessage}</p>}
+      <Link to={`/account/reset/password?email=${signInData.email}`} className={small_link}>Forgot Password?</Link>
       <button type="submit" className="confirm_btn">
         {hasAccount ? "Sign In" : "Sign Up"}
       </button>
       <button
         type="button"
         className="secondary_btn"
-        onClick={() => {
-          setHasAccount((prev) => !prev);
-        }}
+        onClick={hasAccount ? goSignIn : goSignUp}
       >
         {hasAccount ? "Create New Account" : "Sign in with existing account"}
       </button>

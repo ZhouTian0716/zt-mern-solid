@@ -9,6 +9,10 @@
 }
 
 form {
+  // This user-select:none
+  // Helps me to avoid double click on password toggle,
+  // highlighting all form texts
+  user-select: none;
   margin-top: 50px;
   width: 350px;
   padding: 15px;
@@ -37,16 +41,8 @@ form {
   }
 }
 
-.password_container {
-  position: relative;
-  input{
-    width: 100%;
-  }
+
+.small_link{
+  font-size:12px;
 }
-.password_toggle_btn {
-  position: absolute;
-  top:9px;
-  right:10px;
-  font-size:20px;
-  cursor: pointer;
-}
+

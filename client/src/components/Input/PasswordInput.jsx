@@ -20,7 +20,7 @@ const PasswordInput = ({
       {isRepeatPassword ? (
         <input
           className={auth_input}
-          placeholder="Password"
+          placeholder="Confirm Password"
           value={repeatPwdState}
           type={inputType}
           onChange={(e) => {
