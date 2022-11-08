@@ -1,0 +1,25 @@
+@use "./mixin.scss" as mixin;
+
+.confirm_btn {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: mixin.$color-blue;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #1876f29d;
+  }
+}
+
+.secondary_btn {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: mixin.$color-grey-light;
+  cursor: pointer;
+  &:hover {
+    background-color: mixin.$color-grey;
+  }
+}

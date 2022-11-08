@@ -1,0 +1,52 @@
+@use "../../styles/mixin.scss" as mixin;
+
+.flex_row {
+  display: flex;
+  justify-content: space-between;
+  input {
+    width: 48%;
+  }
+}
+
+form {
+  margin-top: 50px;
+  width: 350px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: mixin.$color-theme;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .sign {
+    color: white;
+    font-size: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: mixin.$color-blue;
+  }
+}
+
+.auth_input {
+  padding: 5px;
+  border-radius: 5px;
+  color: rgba(128, 128, 128, 1);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  &:focus {
+    outline: none;
+    border: 1px solid mixin.$color-blue;
+  }
+}
+
+.password_container {
+  position: relative;
+  input{
+    width: 100%;
+  }
+}
+.password_toggle_btn {
+  position: absolute;
+  top:9px;
+  right:10px;
+  font-size:20px;
+  cursor: pointer;
+}

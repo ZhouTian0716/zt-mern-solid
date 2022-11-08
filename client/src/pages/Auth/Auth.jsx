@@ -1,12 +1,14 @@
 import React from "react";
-import { FaUserLock } from "react-icons/fa";
-
-
+import AuthForm from "../../components/Forms/AuthForm";
 import classes from "./Auth.module.scss";
+const { container } = classes;
 
-const { auth_container,sign } = classes;
 const Auth = () => {
-  return <div className={auth_container}><form action=""><FaUserLock className={classes.sign}/><h2>Sign In</h2></form></div>;
+  return (
+    <div className={container}>
+      <AuthForm />
+    </div>
+  );
 };
 
 export default Auth;

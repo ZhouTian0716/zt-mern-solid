@@ -33,7 +33,7 @@ const {
   img_dialog,
   functions,
   addOns,
-  post_btn,
+  
   add_from_device,
   photo_area,
   cancel_btn,
@@ -159,7 +159,7 @@ const PostModal = () => {
           <HiOutlineDotsHorizontal />
         </span>
       </div>
-      <button className={post_btn} type="submit">
+      <button className="confirm_btn" type="submit">
         Post
       </button>
       {/* <button type="button" disabled>Click Me!</button> */}

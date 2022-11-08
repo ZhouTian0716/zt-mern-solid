@@ -1,11 +1,10 @@
-
-
-
 $color-blue: #1877f2;
+$color-grey-light: rgba(128, 128, 128, 0.1);
+$color-grey: rgba(128, 128, 128, 0.3);
 $color-theme: ivory;
 
-$english-font:'Mukta';
-$chinese-font:'Noto+Sans+SC';
+$english-font: "Mukta";
+$chinese-font: "Noto+Sans+SC";
 
 @mixin mobile {
   @media only screen and (max-width: 375px) {
