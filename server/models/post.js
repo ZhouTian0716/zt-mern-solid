@@ -21,12 +21,3 @@ const PostCollection = mongoose.model("Post", postSchema);
 
 export default PostCollection;
 
-// Note: Think about to add location info of creator
-
-// {
-//     creator: "Joe Tian",
-//     title: "",
-//     content: "",
-//     public: true,
-//     selectedFile: "",
-//   }

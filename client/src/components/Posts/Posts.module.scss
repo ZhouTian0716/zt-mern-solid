@@ -1,8 +1,8 @@
-
+@use "../../styles/mixin.scss" as mixin;
 
 .container {
   max-width: 960px;
-  margin: 100px auto;
+  margin: 15px auto;
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,12 +14,21 @@
   /* align-items:start; */
   /* align-items: stretch; */
   transition: all 1s ease-in-out;
-}
 
-@media (max-width: 500px) {
-  .container {
-    grid-template-columns: 1fr;
+  @include mixin.tablet {
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    
+  }
+  @include mixin.mobile {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 }
+
+// @media (max-width: 500px) {
+//   .container {
+//     grid-template-columns: 1fr;
+//     gap: 20px;
+
+//   }
+// }

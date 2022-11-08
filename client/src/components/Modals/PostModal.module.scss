@@ -1,3 +1,5 @@
+@use "../../styles/mixin.scss" as mixin;
+
 .title {
   text-align: center;
   font-size: 1.25rem;
@@ -22,7 +24,7 @@
 
 .form {
   position: relative;
-  width: 300px;
+  width: 350px;
   border-radius: 5px;
   background-color: ivory;
   display: flex;
@@ -78,8 +80,8 @@
     height: 150px;
     margin-bottom: 8px;
     .upload_btn {
-      font-size: 20px;
-      padding: 8px;
+      font-size: 40px;
+      padding: 3px;
       border-radius: 50%;
       background-color: rgba(128, 128, 128, 0.3);
       cursor: pointer;
@@ -88,6 +90,7 @@
       position: absolute;
       background-color: white;
       border-radius: 50%;
+      font-size: 20px;
       padding: 3px;
       right: 5px;
       top: 5px;
@@ -103,7 +106,7 @@
     align-items: center;
     justify-content: space-between;
     svg {
-      font-size: 20px;
+      font-size: 30px;
       padding: 5px;
       border-radius: 50%;
       background-color: rgba(128, 128, 128, 0.3);
@@ -133,7 +136,7 @@
 }
 .functions {
   svg {
-    font-size: 20px;
+    font-size: 30px;
     padding: 3px;
     border-radius: 50%;
     cursor: pointer;
@@ -147,7 +150,7 @@
   padding: 8px 10px;
   border-radius: 5px;
   border: none;
-  background-color: #1877f2;
+  background-color: mixin.$color-blue;
   color: white;
   cursor: pointer;
   &:hover {

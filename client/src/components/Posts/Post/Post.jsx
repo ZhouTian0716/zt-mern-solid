@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 // Action for updating Redux State
 import { deleteOne, deletePost } from "../../../redux/reducers/postsSlice";
 
-const { post_card, close_btn, edit_btn, like_btn, details } = classes;
+const { post_card, close_btn, edit_btn, like_btn, details, likes,author } = classes;
 
 const Post = ({ post }) => {
   const [postLiked, setPostLiked] = useState(false);
@@ -57,24 +57,25 @@ const Post = ({ post }) => {
           {post.content?.length > 40 && "..."}
         </p>
         <p>{post._id}</p>
-        <span>
+        
+      </div>
+      <span className={likes}>
+        {postLiked ? (
+          <AiFillLike
+            className={like_btn}
+            onClick={() => setPostLiked((prev) => !prev)}
+          />
+        ) : (
+          <AiOutlineLike
+            className={like_btn}
+            onClick={() => setPostLiked((prev) => !prev)}
+          />
+        )}
+        : {post.likeCount}
+      </span>
+      <span className={author}>
           By : {post.creator}, {moment(post.createdAt).fromNow()}
         </span>
-        <p>
-          {postLiked ? (
-            <AiFillLike
-              className={like_btn}
-              onClick={() => setPostLiked((prev) => !prev)}
-            />
-          ) : (
-            <AiOutlineLike
-              className={like_btn}
-              onClick={() => setPostLiked((prev) => !prev)}
-            />
-          )}
-          : {post.likeCount}
-        </p>
-      </div>
     </div>
   );
 };

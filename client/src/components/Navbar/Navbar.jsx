@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { MdOutlinePostAdd } from "react-icons/md";
 import { AiOutlineLogin } from "react-icons/ai";
 import logo from "../../images/logo.png";
@@ -23,10 +24,14 @@ const Navbar = () => {
           dispatch(postModalToggle());
         }}
       />
-      <span className={name}>
-        Memories <img className={logoImg} src={logo} alt="logo" />
-      </span>
-      <AiOutlineLogin className={btn} />
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <span className={name}>
+          Memories <img className={logoImg} src={logo} alt="logo" />
+        </span>
+      </Link>
+      <Link to="/auth">
+        <AiOutlineLogin className={btn} />
+      </Link>
     </div>
   );
 };

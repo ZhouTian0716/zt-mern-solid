@@ -1,0 +1,17 @@
+@use '../../styles/mixin.scss' as mixin;
+
+.auth_container {
+  display: flex;
+  justify-content: center;
+  .sign{
+    padding:5px;
+    border-radius:50%;
+    background-color:mixin.$color-blue;
+  }
+  form {
+    margin-top: 50px;
+    height: 200px;
+    width: 300px;
+    background-color: ivory;
+  }
+}

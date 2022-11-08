@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.scss";
+import "./styles/globals.scss";
 
 // Component imports
 import Navbar from "./components/Navbar/Navbar";
@@ -12,13 +12,13 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <div className="app">
+       
           <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
           </Routes>
-        </div>
+        
       </BrowserRouter>
     </>
   );
