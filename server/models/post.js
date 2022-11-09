@@ -10,7 +10,10 @@ const postSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  likedBy:[],
+  likedBy: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: new Date(),
@@ -20,4 +23,3 @@ const postSchema = mongoose.Schema({
 const PostCollection = mongoose.model("Post", postSchema);
 
 export default PostCollection;
-

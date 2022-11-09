@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { FaUserLock } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import PasswordInput from "../../components/Input/PasswordInput";
+
+// Redux
+import { useDispatch } from "react-redux";
+// Action for updating Redux State
+import { addNewAccount,signInAccount } from "../../redux/reducers/accountsSlice";
+import { isLoggedInToggle } from "../../redux/reducers/displaySlice";
 
 import classes from "./AuthForm.module.scss";
 const { flex_row, sign, auth_input, small_link } = classes;
@@ -20,20 +26,25 @@ const AuthForm = () => {
     password: "",
   };
 
-  const [hasAccount, setHasAccount] = useState(false);
+  const [hasAccount, setHasAccount] = useState(true);
   const [signUpData, setSignUpData] = useState(signUpDataInitial);
   const [signInData, setSignInData] = useState(signInDataInitial);
   const [repeatPassword, setRepeatPassword] = useState("");
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSignIn = (e) => {
     e.preventDefault();
     // console.log(signInData);
     // pass signInData to backend here
-
+    dispatch(signInAccount(signInData)).unwrap();
+    dispatch(isLoggedInToggle());
     // Reset State
     clearSignInForm();
+    navigate("/");
   };
 
   const handleSignUp = (e) => {
@@ -41,11 +52,13 @@ const AuthForm = () => {
     // console.log(signUpData);
     if (signUpData.password === repeatPassword) {
       console.log("match");
-      // console.log(signInData);
+      // console.log(signUpData);
       // pass signUpData to backend here
-
+      dispatch(addNewAccount(signUpData)).unwrap();
+      dispatch(isLoggedInToggle());
       // Reset State
       clearSignUpForm();
+      navigate("/");
     } else {
       setHasError(true);
       setErrorMessage("Confirm Password Not Matching");

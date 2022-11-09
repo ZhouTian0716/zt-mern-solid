@@ -1,16 +1,16 @@
 .app_bar {
   display: flex;
-  width:80%;
+  width: 80%;
   align-items: center;
   justify-content: space-between;
   background-color: ivory;
   border-radius: 15px;
   margin: 15px auto;
   padding: 10px 20px;
-  font-size: 2rem;
   .btn {
     color: #1877f2;
     border-radius: 50%;
+    font-size: 30px;
     padding: 5px;
     cursor: pointer;
     &:hover {
@@ -21,10 +21,49 @@
     display: flex;
     align-items: center;
     color: steelblue;
+    font-size: 20px;
   }
   .logoImg {
     margin-left: 10px;
     height: 2.5rem;
     width: 2.5rem;
+  }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    .avatarImg {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    span {
+      font-size: 16px;
+    }
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+  }
+
+  .auth_btn {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    span{
+      margin-left:5px;
+    }
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+  }
+  .link {
+    text-decoration: none;
   }
 }

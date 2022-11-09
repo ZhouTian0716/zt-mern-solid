@@ -6,8 +6,8 @@ const accountSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   avatar: { type: String, default: "1" },
-  followers: { type: Array, default: [] },
-  following: { type: Array, default: [] },
+  followers: { type: [String], default: [] },
+  following: { type: [String], default: [] },
   createdAt: {
     type: Date,
     default: new Date(),

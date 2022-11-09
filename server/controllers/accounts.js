@@ -8,8 +8,6 @@ import AccountCollection from "../models/account.js";
 export const getAllAccounts = async (req, res) => {
   try {
     const allAccounts = await AccountCollection.find();
-    // 笔记: json()里的res最好在insomnia里面测试检查一下结构
-    // 方便前端引用
     res.status(200).json(allAccounts);
   } catch (error) {
     res.status(404).json({ ServerReportError: error.message });
@@ -59,7 +57,7 @@ export const signIn = async (req, res) => {
       secret,
       { expiresIn: "1h" }
     );
-    res.status(200).json({ result: existingAccount, token });
+    res.status(200).json({ account: existingAccount, token });
   } catch (error) {
     res.status(500).json({ message: "Sign In Failed", error: error });
   }
@@ -85,7 +83,7 @@ export const signUp = async (req, res) => {
     const token = jwt.sign({ email: result.email, id: result._id }, secret, {
       expiresIn: "1h",
     });
-    res.status(200).json({ result, token });
+    res.status(200).json({ account: result, token });
   } catch (error) {
     res.status(500).json({ message: "Sign Up Failed" });
     console.log(error);

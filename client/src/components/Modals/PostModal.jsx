@@ -12,9 +12,7 @@ import { TiUserAdd } from "react-icons/ti";
 import FileBase from "react-file-base64";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
-// Query for getting Redux State
-import { postModalStatus } from "../../redux/reducers/displaySlice";
+import { useDispatch } from "react-redux";
 // Action for updating Redux State
 import { addNewPost } from "../../redux/reducers/postsSlice";
 import { postModalToggle } from "../../redux/reducers/displaySlice";

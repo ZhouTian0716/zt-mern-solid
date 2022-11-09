@@ -1,11 +1,11 @@
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
-const Posts_Route = "http://localhost:4000/posts";
+import API from '../../api/index'
+
+
+const Posts_Route = "/posts";
 
 const initialState = {
-  // posts: ['idle','idle'],
   posts: [],
   status: "idle", //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
@@ -16,14 +16,14 @@ const initialState = {
 // second arg: payload creator call back
 // 💥💥payload returned and created for updating redux state at fetchPosts.fullfilled 💥💥
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await axios.get(Posts_Route);
+  const response = await API.get(Posts_Route);
   return response.data;
 });
 
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
   async (postData) => {
-    const response = await axios.post(Posts_Route, postData);
+    const response = await API.post(Posts_Route, postData);
     // console.log(response.data);
     return response.data;
   }
@@ -34,7 +34,7 @@ export const deletePost = createAsyncThunk(
   async (requestBody) => {
     // console.log(requestBody);
     // 笔记：axios delete method, requestBody needs to be set like this
-    const response = await axios.delete(Posts_Route, { data: requestBody });
+    const response = await API.delete(Posts_Route, { data: requestBody });
     console.log(response.data);
   }
 );
