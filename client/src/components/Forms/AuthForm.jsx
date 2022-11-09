@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FaUserLock } from "react-icons/fa";
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import PasswordInput from "../../components/Input/PasswordInput";
 
 import classes from "./AuthForm.module.scss";
-const { flex_row, sign, auth_input,small_link } = classes;
+const { flex_row, sign, auth_input, small_link } = classes;
 
 const AuthForm = () => {
   const signUpDataInitial = {
@@ -150,7 +150,15 @@ const AuthForm = () => {
         />
       )}
       {hasError && <p>{errorMessage}</p>}
-      <Link to={`/account/reset/password?email=${signInData.email}`} className={small_link}>Forgot Password?</Link>
+      {hasAccount && (
+        <Link
+          to={`/account/reset/password?email=${signInData.email}`}
+          className={small_link}
+        >
+          Forgot Password?
+        </Link>
+      )}
+
       <button type="submit" className="confirm_btn">
         {hasAccount ? "Sign In" : "Sign Up"}
       </button>

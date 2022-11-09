@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   createPost,
   getPostById,
@@ -8,10 +9,12 @@ import {
   likePost,
 } from "../controllers/posts.js";
 
+
 // 👻 Starting by calling with express
 const router = express.Router();
 
 // 👻 Define your routes and methods (from controller folder)
+// add auth middleware later
 router.get("/", getAllPosts);
 router.get("/:id", getPostById);
 router.post("/", createPost);

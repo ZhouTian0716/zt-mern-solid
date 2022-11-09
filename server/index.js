@@ -6,6 +6,7 @@ import cors from "cors";
 
 // 👻 Route imports, this will keep adding up
 import postRoutes from "./routes/posts.js";
+import accountRoutes from "./routes/accounts.js";
 
 // 👻 Starting by calling with express
 const app = express();
@@ -25,6 +26,7 @@ app.use(cors());
 // });
 
 app.use("/posts", postRoutes);
+app.use("/accounts", accountRoutes);
 
 // 👻 Check this from Mongo DB
 const MY_MONGODB_CONNECTION_URL = process.env.CONNECTION_URL;
