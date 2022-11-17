@@ -1,17 +1,15 @@
-import express from "express";
+const express = require("express");
+// 👻 Starting by calling with express
+const router = express.Router();
 
-import {
+const {
   createPost,
   getPostById,
   getAllPosts,
   updatePost,
   deletePost,
   likePost,
-} from "../controllers/posts.js";
-
-
-// 👻 Starting by calling with express
-const router = express.Router();
+} = require("../controllers/posts.js");
 
 // 👻 Define your routes and methods (from controller folder)
 // add auth middleware later
@@ -22,4 +20,4 @@ router.patch("/:id", updatePost);
 router.delete("/", deletePost);
 router.patch("/:id/likePost", likePost);
 
-export default router;
+module.exports = router;

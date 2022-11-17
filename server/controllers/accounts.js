@@ -1,11 +1,11 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-import AccountCollection from "../models/account.js";
+const AccountCollection = require("../models/account.js");
 
-export const getAllAccounts = async (req, res) => {
+const getAllAccounts = async (req, res) => {
   try {
     const allAccounts = await AccountCollection.find();
     res.status(200).json(allAccounts);
@@ -14,7 +14,7 @@ export const getAllAccounts = async (req, res) => {
   }
 };
 
-export const deleteAccount = async (req, res) => {
+const deleteAccount = async (req, res) => {
   // console.log(req.params);
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
@@ -27,7 +27,7 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-export const deleteAll = async (req, res) => {
+const deleteAll = async (req, res) => {
   try {
     await AccountCollection.deleteMany({});
     res.status(200).json({ message: "All Accounts Cleared" });
@@ -36,7 +36,7 @@ export const deleteAll = async (req, res) => {
   }
 };
 
-export const signIn = async (req, res) => {
+const signIn = async (req, res) => {
   const { email, password } = req.body;
   const secret = process.env.JWT_SECRET;
   try {
@@ -63,7 +63,7 @@ export const signIn = async (req, res) => {
   }
 };
 
-export const signUp = async (req, res) => {
+const signUp = async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
   const secret = process.env.JWT_SECRET;
   try {
@@ -88,4 +88,12 @@ export const signUp = async (req, res) => {
     res.status(500).json({ message: "Sign Up Failed" });
     console.log(error);
   }
+};
+
+module.exports = {
+  getAllAccounts,
+  deleteAccount,
+  deleteAll,
+  signIn,
+  signUp,
 };

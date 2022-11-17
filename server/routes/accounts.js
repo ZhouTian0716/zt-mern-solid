@@ -1,11 +1,11 @@
-import express from "express";
-import {
+const express = require('express');
+const {
   getAllAccounts,
   signIn,
   signUp,
   deleteAccount,
   deleteAll,
-} from "../controllers/accounts.js";
+} = require("../controllers/accounts.js") ;
 
 // 👻 Starting by calling with express
 const router = express.Router();
@@ -18,4 +18,4 @@ router.delete("/", deleteAll);
 router.post("/signin", signIn);
 router.post("/signup", signUp);
 
-export default router;
+module.exports = router;

@@ -1,43 +1,50 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 // 👻 Controllers Need Access to Models
-import PostCollection from "../models/post.js";
+const PostCollection = require("../models/post.js");
 
-export const createPost = async (req, res) => {
+const createPost = async (req, res) => {
   // console.log(req.body)
+  if (!req?.body) {
+    return res
+      .status(400)
+      .json({ message: "Post body required" });
+  }
+
   const post = req.body;
-  const newPost = new PostCollection(post);
+  // remove this later
+  console.log(post);
   try {
-    await newPost.save();
-    res.status(201).json(newPost);
-  } catch (error) {
-    res.status(409).json({ ServerReportError: error.message });
+    const result = await PostCollection.create(post);
+    
+    res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
   }
 };
 
-export const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res) => {
   try {
-    const allPosts = await PostCollection.find();
-    // 笔记: json()里的res最好在insomnia里面测试检查一下结构
-    // 方便前端引用
-    res.status(200).json(allPosts);
-  } catch (error) {
-    res.status(404).json({ ServerReportError: error.message });
+    const data = await PostCollection.find();
+    if (!data) return res.status(204).json({ message: "No data found" });
+    res.status(200).json(data);
+  } catch (err) {
+    console.error(err);
   }
 };
 
-export const getPostById = async (req, res) => {
+const getPostById = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
-  return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No post with id: ${id}`);
   try {
     const post = await PostCollection.findById(id);
     res.status(200).json(post);
-  } catch (error) {
-    res.status(404).json({ ServerReportError: error });
+  } catch (err) {
+    console.error(err);
   }
-}
+};
 
-export const updatePost = async (req, res) => {
+const updatePost = async (req, res) => {
   // Destructure and rename to _id
   const { id: _id } = req.params;
   const post = req.body;
@@ -57,7 +64,7 @@ export const updatePost = async (req, res) => {
   res.json(updatedPost);
 };
 
-export const deletePost = async (req, res) => {
+const deletePost = async (req, res) => {
   console.log(req.body);
   const { postId } = req.body;
 
@@ -66,12 +73,12 @@ export const deletePost = async (req, res) => {
     // const result = await postSelected.deleteOne();
     const result = await PostCollection.findByIdAndRemove(postId);
     res.status(201).json({ status: "delete success", item_id: result._id });
-  } catch (error) {
-    res.status(409).json({ ServerReportError: error.message });
+  } catch (err) {
+    console.error(err);
   }
 };
 
-export const likePost = async (req, res) => {
+const likePost = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
@@ -87,4 +94,13 @@ export const likePost = async (req, res) => {
   );
 
   res.json(updatedPost.likeCount);
+};
+
+module.exports = {
+  createPost,
+  getAllPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+  likePost,
 };
