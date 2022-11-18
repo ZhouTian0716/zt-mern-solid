@@ -25,7 +25,7 @@ export const signInAccount = createAsyncThunk(
     "accounts/signInAccount",
     async (signInData) => {
       const response = await API.post(`${Accounts_Route}/signin`, signInData);
-      // console.log(response.data);
+      console.log(response.data);
       return response.data;
     }
   );
@@ -50,7 +50,9 @@ export const accountsSlice = createSlice({
       .addCase(signInAccount.fulfilled, (state, action) => {
         state.status = "idle";
         state.currentAccount = action.payload;
-        localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
+        // No, we dont want localStorage
+        // Try redux persist setup
+        // localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
       })
   },
 });

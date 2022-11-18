@@ -2,6 +2,9 @@ const express = require("express");
 // 👻 Starting by calling with express
 const router = express.Router();
 
+// For tesing purposes
+const verifyJWT = require("../middleware/verifyJWT")
+
 const {
   createPost,
   getPostById,
@@ -13,7 +16,7 @@ const {
 
 // 👻 Define your routes and methods (from controller folder)
 // add auth middleware later
-router.get("/", getAllPosts);
+router.get("/", verifyJWT, getAllPosts);
 router.get("/:id", getPostById);
 router.post("/", createPost);
 router.patch("/:id", updatePost);

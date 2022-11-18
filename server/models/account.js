@@ -12,6 +12,7 @@ const accountSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  refreshToken: String,
 });
 
 module.exports = mongoose.model('account', accountSchema);

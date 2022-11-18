@@ -31,7 +31,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
-    console.log(user);
+    // console.log(user);
   }, []);
 
   // useEffect(() => {
