@@ -40,7 +40,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [currentAccount.accessToken, refresh]);
+  }, [currentAccount, refresh]);
 
   return axiosPrivate;
 };
