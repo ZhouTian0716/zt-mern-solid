@@ -2,6 +2,7 @@ const AccountCollection = require("../models/account.js");
 const jwt = require("jsonwebtoken");
 
 const handleRefreshToken = async (req, res) => {
+  console.log(req.cookies)
   // Learning question here, how do you send cookie from front end?
   
   const cookies = req.cookies;
@@ -23,7 +24,7 @@ const handleRefreshToken = async (req, res) => {
         id: decoded.id,
       },
       accessSecret,
-      { expiresIn: '30s' }
+      { expiresIn: '10s' }
     );
     res
       .status(200)

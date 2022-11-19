@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { FaUserLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import PasswordInput from "../../components/Input/PasswordInput";
 
 // Redux
 import { useDispatch } from "react-redux";
 // Action for updating Redux State
-import { addNewAccount,signInAccount } from "../../redux/reducers/accountsSlice";
+import {
+  addNewAccount,
+  signInAccount,
+} from "../../redux/reducers/accountsSlice";
 import { isLoggedInToggle } from "../../redux/reducers/displaySlice";
 
 import classes from "./AuthForm.module.scss";
@@ -22,8 +25,8 @@ const AuthForm = () => {
   };
 
   const signInDataInitial = {
-    email: "",
-    password: "",
+    email: "user1@example.com",
+    password: "abc123",
   };
 
   const [hasAccount, setHasAccount] = useState(true);
@@ -34,6 +37,9 @@ const AuthForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const dispatch = useDispatch();
 
   const handleSignIn = (e) => {
@@ -44,7 +50,7 @@ const AuthForm = () => {
     dispatch(isLoggedInToggle());
     // Reset State
     clearSignInForm();
-    navigate("/");
+    navigate(from, { replace: true });
   };
 
   const handleSignUp = (e) => {

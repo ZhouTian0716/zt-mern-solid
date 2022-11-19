@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import API from '../../api/index'
+import { API } from "../../api/index";
 
 
 const Posts_Route = "/posts";
@@ -16,6 +16,7 @@ const initialState = {
 // second arg: payload creator call back
 // 💥💥payload returned and created for updating redux state at fetchPosts.fullfilled 💥💥
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  
   const response = await API.get(Posts_Route);
   return response.data;
 });

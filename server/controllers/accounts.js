@@ -55,7 +55,7 @@ const signIn = async (req, res) => {
           id: foundAccount._id,
         },
         accessSecret,
-        { expiresIn: "20s" } // units in 's' 'm' 'h' 'd'
+        { expiresIn: "10s" } // units in 's' 'm' 'h' 'd'
       );
       const refreshToken = jwt.sign(
         {

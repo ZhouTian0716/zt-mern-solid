@@ -7,11 +7,14 @@ const {
   deleteAll,
 } = require("../controllers/accounts.js") ;
 
+// For tesing purposes
+const verifyJWT = require("../middleware/verifyJWT")
+
 // 👻 Starting by calling with express
 const router = express.Router();
 
 // 👻 Define your routes and methods (from controller folder)
-router.get("/", getAllAccounts);
+router.get("/", verifyJWT,getAllAccounts);
 router.delete("/:id", deleteAccount);
 router.delete("/", deleteAll);
 

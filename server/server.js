@@ -40,7 +40,7 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 // 👻 Routes
 app.use("/posts", require("./routes/posts"));
 app.use("/accounts", require("./routes/accounts"));
-app.use("/accounts/refresh", require("./routes/refresh"));
+app.use("/refresh", require("./routes/refresh"));
 app.use("/accounts/logout", require("./routes/logout"));
 
 // 👻 Routes under need to check JWT

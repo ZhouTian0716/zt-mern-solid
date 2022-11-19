@@ -16,7 +16,8 @@ const {
 
 // 👻 Define your routes and methods (from controller folder)
 // add auth middleware later
-router.get("/", verifyJWT, getAllPosts);
+router.get("/",getAllPosts);
+// router.get("/", verifyJWT, getAllPosts);
 router.get("/:id", getPostById);
 router.post("/", createPost);
 router.patch("/:id", updatePost);
