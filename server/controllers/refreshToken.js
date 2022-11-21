@@ -24,7 +24,7 @@ const handleRefreshToken = async (req, res) => {
         id: decoded.id,
       },
       accessSecret,
-      { expiresIn: '10s' }
+      { expiresIn: '15s' }
     );
     res
       .status(200)

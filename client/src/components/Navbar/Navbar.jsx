@@ -52,9 +52,10 @@ const navigate=useNavigate()
             <span>{currentAccount.login_account.first_name}</span>
           </Link>
 
+          <Link to="/" className={link}>
           <div className={auth_btn} onClick={() => {navigate('/auth')}}>
             <AiOutlineLogin /> <span>Log out</span>
-          </div>
+          </div></Link>
         </>
       ) : (
         <Link to="/auth" className={link}>

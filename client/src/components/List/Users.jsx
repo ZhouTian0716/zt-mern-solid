@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import {API} from '../../api/index'
+
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Users = () => {
@@ -23,7 +23,9 @@ const Users = () => {
         isMounted && setUsers(response.data);
       } catch (err) {
         console.error(err);
+        // ZT Note: this is an issue to be fixed later
         // navigate("/auth", { state: { from: location }, replace: true });
+        navigate("/auth");
       }
     };
 

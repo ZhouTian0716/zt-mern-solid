@@ -7,8 +7,6 @@ import Users from '../../components/List/Users'
 import { useSelector } from "react-redux";
 import {
   getCurrentAccount,
- 
-
 } from "../../redux/reducers/accountsSlice";
 
 // testing function

@@ -10,6 +10,9 @@ import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
+// Persist protect routs about login routes
+import PersistLogin from "./components/PersistLogin/PersistLogin";
+
 // Redux Hooks
 import { useSelector } from "react-redux";
 // Query for getting Redux State
@@ -21,22 +24,21 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-       
-          <Navbar />
+        <Navbar />
 
-          {isPosting && (
-        <div className='underlay'>
-          <PostModal />
-        </div>
-      )}
+        {isPosting && (
+          <div className="underlay">
+            <PostModal />
+          </div>
+        )}
 
-
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard/:id" element={<Dashboard/>} />
-          </Routes>
-        
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route element={<PersistLogin />}>
+            <Route path="/dashboard/:id" element={<Dashboard />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </>
   );
