@@ -63,7 +63,7 @@ const signIn = async (req, res) => {
           id: foundAccount._id,
         },
         refreshSecret,
-        { expiresIn: "30s" } // units in 's' 'm' 'h' 'd'
+        { expiresIn: "50s" } // units in 's' 'm' 'h' 'd'
       );
     
       // Saving refreshToken with current user
@@ -81,6 +81,7 @@ const signIn = async (req, res) => {
       });
 
       // Send authorization account and access token to user
+      
       res.status(200).json({ login_account: foundAccount, accessToken });
     } else {
       return res.status(400).json({ message: "Invalid Credentials" });

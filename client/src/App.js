@@ -9,6 +9,7 @@ import PostModal from "./components/Modals/PostModal";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Missing from "./pages/Missing/Missing";
 
 // Persist protect routs about login routes
 import PersistLogin from "./components/PersistLogin/PersistLogin";
@@ -38,6 +39,7 @@ const App = () => {
           <Route element={<PersistLogin />}>
             <Route path="/dashboard/:id" element={<Dashboard />} />
           </Route>
+          <Route path="*" element={<Missing/>} />
         </Routes>
       </BrowserRouter>
     </>

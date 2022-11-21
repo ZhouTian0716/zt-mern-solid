@@ -34,7 +34,8 @@ export const signInAccount = createAsyncThunk(
     const response = await API.post(`${Accounts_Route}/signin`, signInData, {
       withCredentials: true,
     });
-    console.log(response.data);
+    // this response is manage by youself how to set the backend
+    // console.log(response.data);
     return response.data;
   }
 );
@@ -44,6 +45,7 @@ export const accountsSlice = createSlice({
   initialState,
   reducers: {
     tokenRefresh: (state, action) => {
+      console.log(action.payload)
       state.currentAccount.accessToken = action.payload;
     },
   },
