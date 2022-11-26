@@ -63,7 +63,7 @@ const signIn = async (req, res) => {
           id: foundAccount._id,
         },
         refreshSecret,
-        { expiresIn: "50s" } // units in 's' 'm' 'h' 'd'
+        { expiresIn: "2m" } // units in 's' 'm' 'h' 'd'
       );
     
       // Saving refreshToken with current user

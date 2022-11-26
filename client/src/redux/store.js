@@ -9,4 +9,7 @@ export const store = configureStore({
     posts: postsReducer,
     accounts: accountsReducer,
   },
+
+  // devTools:false
+  // This setup can close devtool in browser for security reasons.
 });

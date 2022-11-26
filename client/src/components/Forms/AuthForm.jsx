@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserLock } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import PasswordInput from "../../components/Input/PasswordInput";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // Action for updating Redux State
 import {
   addNewAccount,
   signInAccount,
 } from "../../redux/reducers/accountsSlice";
-import { isLoggedInToggle } from "../../redux/reducers/displaySlice";
+import {
+  isLoggedInToggle,
+  persistStatus,
+  persistToggle,
+} from "../../redux/reducers/displaySlice";
 
 import classes from "./AuthForm.module.scss";
-const { flex_row, sign, auth_input, small_link } = classes;
+const { flex_row, sign, auth_input, small_link, persistCheck } = classes;
 
 const AuthForm = () => {
   const signUpDataInitial = {
@@ -35,6 +39,8 @@ const AuthForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const persist = useSelector(persistStatus);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -93,6 +99,14 @@ const AuthForm = () => {
     clearSignUpForm();
     setHasAccount((prev) => !prev);
   };
+
+  const togglePersist = () => {
+    dispatch(persistToggle());
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   const signUpNames = (
     <div className={flex_row}>
@@ -176,6 +190,17 @@ const AuthForm = () => {
         >
           Forgot Password?
         </Link>
+      )}
+      {hasAccount && (
+        <div className={persistCheck}>
+          <input
+            type="checkbox"
+            id="persist"
+            onChange={togglePersist}
+            checked={persist}
+          />
+          <label htmlFor="persist">Trust This Device</label>
+        </div>
       )}
 
       <button type="submit" className="confirm_btn">

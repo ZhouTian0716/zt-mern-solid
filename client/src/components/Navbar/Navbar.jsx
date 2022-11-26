@@ -13,6 +13,9 @@ import { postModalToggle } from "../../redux/reducers/displaySlice";
 // Query for getting Redux State
 import { getCurrentAccount } from "../../redux/reducers/accountsSlice";
 
+// hook
+import { useLogout } from "../../hooks/useLogout";
+
 import classes from "./Navbar.module.scss";
 
 const { app_bar, btn, name, logoImg, avatarImg, userInfo, auth_btn, link } =
@@ -21,7 +24,13 @@ const { app_bar, btn, name, logoImg, avatarImg, userInfo, auth_btn, link } =
 const Navbar = () => {
   const dispatch = useDispatch();
   const currentAccount = useSelector(getCurrentAccount);
-const navigate=useNavigate()
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <div className={app_bar}>
       {currentAccount?.login_account && (
@@ -53,9 +62,13 @@ const navigate=useNavigate()
           </Link>
 
           <Link to="/" className={link}>
-          <div className={auth_btn} onClick={() => {navigate('/auth')}}>
-            <AiOutlineLogin /> <span>Log out</span>
-          </div></Link>
+            <div
+              className={auth_btn}
+              onClick={handleLogout}
+            >
+              <AiOutlineLogin /> <span>Log out</span>
+            </div>
+          </Link>
         </>
       ) : (
         <Link to="/auth" className={link}>

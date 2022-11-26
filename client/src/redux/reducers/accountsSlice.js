@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { API} from "../../api/index";
+import { API } from "../../api/index";
 
 const Accounts_Route = "/accounts";
 
@@ -45,9 +45,13 @@ export const accountsSlice = createSlice({
   initialState,
   reducers: {
     tokenRefresh: (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.currentAccount.accessToken = action.payload;
     },
+    logoutCurrent:(state)=>{
+      console.log('hhhah');
+      state.currentAccount=null
+    }
   },
   extraReducers(builder) {
     builder
@@ -90,6 +94,6 @@ export const getCurrentAccount = (state) => state.accounts.currentAccount;
 export const getAllAccounts = (state) => state.accounts.accounts;
 
 // Action creators are generated for each case reducer function
-export const { tokenRefresh } = accountsSlice.actions;
+export const { tokenRefresh,logoutCurrent } = accountsSlice.actions;
 
 export default accountsSlice.reducer;
